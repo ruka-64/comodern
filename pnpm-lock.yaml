@@ -15,6 +15,9 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+      uglify-js:
+        specifier: ^3.19.3
+        version: 3.19.3
 
 packages:
 
@@ -26,8 +29,15 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  uglify-js@3.19.3:
+    resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+
 snapshots:
 
   picocolors@1.1.1: {}
 
   typescript@5.8.3: {}
+
+  uglify-js@3.19.3: {}
