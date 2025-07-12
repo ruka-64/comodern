@@ -1,0 +1,19 @@
+{
+  "name": "comodern",
+  "version": "0.1.0",
+  "description": "A Modern console wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "console",
+    "logger"
+  ],
+  "author": "r64",
+  "license": "MIT",
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
