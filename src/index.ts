@@ -1,4 +1,4 @@
-import color from 'picocolors';
+import pc from 'picocolors';
 
 interface LogLevelTypes {
   level: number;
@@ -13,19 +13,20 @@ const logLevels: LogLevelTypes[] = [
 ];
 
 export function Logger(level: string) {
+  const c = console.log;
   const actualLevel =
     logLevels.find((l) => l.label === level)?.level ?? logLevels[0].level;
 
   function defPrefix(level: number): string {
     switch (level) {
       case 0:
-        return color.bgBlackBright(color.white(` > `));
+        return pc.bgBlackBright(pc.white(` > `));
       case 1:
-        return color.bgCyan(color.black(` i `));
+        return pc.bgCyan(pc.black(` i `));
       case 2:
-        return color.bgYellow(color.black(` ! `));
+        return pc.bgYellow(pc.black(` ! `));
       case 3:
-        return color.bgRed(color.black(` × `));
+        return pc.bgRed(pc.black(` × `));
       default:
         throw new Error(`Unknown level detected (level: ${level})`);
     }
@@ -37,14 +38,14 @@ export function Logger(level: string) {
 
       // オブジェクトの検出
       if (Object.prototype.toString.call(str) === '[object Object]') {
-        return console.log(prefix + color.gray(' Object:\n'), str, ...args);
+        return c(prefix + pc.gray(' Object:\n'), str, ...args);
       }
 
       // エラーメッセージの検出
       if (str.stack) {
         return console.error(prefix, str, ...args);
       } else {
-        return console.log(prefix, str, ...args);
+        return c(prefix, str, ...args);
       }
     }
   };
@@ -56,12 +57,12 @@ export function Logger(level: string) {
     error: (str: any, ...args: any[]) => printLogs(3, str, args),
     success: (str: any, ...args: any[]) => {
       if (1 >= actualLevel) {
-        console.log(`${color.greenBright(` ✔ `)} ${str}`, ...args);
+        c(`${pc.greenBright(` ✔ `)} ${str}`, ...args);
       }
     },
     fail: (str: any, ...args: any[]) => {
       if (1 >= actualLevel) {
-        console.log(`${color.redBright(` ✗ `)} ${str}`, ...args);
+        c(`${pc.redBright(` ✗ `)} ${str}`, ...args);
       }
     },
   };
