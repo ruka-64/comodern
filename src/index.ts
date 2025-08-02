@@ -1,4 +1,4 @@
-import color from 'picocolors';
+import pc from 'picocolors';
 
 interface LogLevelTypes {
   level: number;
@@ -11,6 +11,8 @@ const logLevels: LogLevelTypes[] = [
   { level: 2, label: 'warn' },
   { level: 3, label: 'error' },
 ];
+
+const c = console;
 
 export class Logger {
   private level: number;
@@ -33,27 +35,27 @@ export class Logger {
   }
   success(str: any, ...args: any[]) {
     if (1 >= this.level) {
-      console.log(`${color.greenBright(` ✔ `)} ${str}`, ...args);
+      c.log(`${pc.greenBright(` ✔ `)} ${str}`, ...args);
     }
   }
   fail(str: any, ...args: any[]) {
     if (1 >= this.level) {
-      console.log(`${color.redBright(` ✗ `)} ${str}`, ...args);
+      c.log(`${pc.redBright(` ✗ `)} ${str}`, ...args);
     }
   }
 
   private defPrefix(level: number) {
     if (level === 0) {
-      return color.bgBlackBright(color.white(` > `));
+      return pc.bgBlackBright(pc.white(` > `));
     }
     if (level === 1) {
-      return color.bgCyan(color.black(` i `));
+      return pc.bgCyan(pc.black(` i `));
     }
     if (level === 2) {
-      return color.bgYellow(color.black(` ! `));
+      return pc.bgYellow(pc.black(` ! `));
     }
     if (level === 3) {
-      return color.bgRed(color.black(` × `));
+      return pc.bgRed(pc.black(` × `));
     } else {
       throw new Error(`Unknown level detected (level: ${level})`);
     }
@@ -64,13 +66,13 @@ export class Logger {
       const p = this.defPrefix(level);
       //Object detection
       if (Object.prototype.toString.call(str) === '[object Object]') {
-        return console.log(p + color.gray(' Object:\n'), str, ...args);
+        return c.log(p + pc.gray(' Object:\n'), str, ...args);
       }
       //Error message detection
       if (str.stack) {
-        return console.error(p, str, ...args);
+        return c.error(p, str, ...args);
       } else {
-        return console.log(p, str, ...args);
+        return c.log(p, str, ...args);
       }
     }
   }
